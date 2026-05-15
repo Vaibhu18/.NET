@@ -1,0 +1,16 @@
+GET http://localhost:5224/api/PaymentDetail
+
+###
+POST http://localhost:5224/api/PaymentDetail
+Content-Type: application/json
+
+{
+  "cardNumber": "1234567812345678",
+  "cardHolderName": "Vaibhav Shinde",
+  "expirationDate": "12/26",
+  "securityCode": "123"
+}
+
+###
+GET http://localhost:5224/api/PaymentDetail/3
+###

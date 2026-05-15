@@ -1,0 +1,7 @@
+E:\SYSTEM\Visual Studio\source\repos\Basic\Basic\bin\Debug\Basic.exe.config
+E:\SYSTEM\Visual Studio\source\repos\Basic\Basic\bin\Debug\Basic.exe
+E:\SYSTEM\Visual Studio\source\repos\Basic\Basic\bin\Debug\Basic.pdb
+E:\SYSTEM\Visual Studio\source\repos\Basic\Basic\obj\Debug\Basic.csproj.AssemblyReference.cache
+E:\SYSTEM\Visual Studio\source\repos\Basic\Basic\obj\Debug\Basic.csproj.CoreCompileInputs.cache
+E:\SYSTEM\Visual Studio\source\repos\Basic\Basic\obj\Debug\Basic.exe
+E:\SYSTEM\Visual Studio\source\repos\Basic\Basic\obj\Debug\Basic.pdb

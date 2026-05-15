@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\SYSTEM\\Visual Studio\\source\\repos\\Basic\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{07008CD3-784B-4686-854E-A49F5CA3A2C8}|Basic\\Basic.csproj|e:\\system\\visual studio\\source\\repos\\basic\\basic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{07008CD3-784B-4686-854E-A49F5CA3A2C8}|Basic\\Basic.csproj|solutionrelative:basic\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\SYSTEM\\Visual Studio\\source\\repos\\Basic\\Basic\\Program.cs",
+              "RelativeDocumentMoniker": "Basic\\Program.cs",
+              "ToolTip": "E:\\SYSTEM\\Visual Studio\\source\\repos\\Basic\\Basic\\Program.cs",
+              "RelativeToolTip": "Basic\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAwBAAAAA3AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-04T03:41:50.747Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

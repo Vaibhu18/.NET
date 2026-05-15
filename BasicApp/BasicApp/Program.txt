@@ -1,0 +1,54 @@
+using Microsoft.AspNetCore.Mvc;
+
+var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+
+var todos = new List<Todo>();
+
+app.MapPost("/todos/name", (FullName fullName) =>
+{
+    Console.WriteLine($"Hi, I am vaibhav {fullName.fullName}");
+    return TypedResults.Ok(todos);
+});
+
+app.MapPost("/todos", (Todo task) =>
+{
+    todos.Add(task);
+    return TypedResults.Created("/todos/{id}", new
+    {
+        message = "New TODO added",
+        data = task
+    });
+});
+
+app.MapPut("/todos/{id}", (int id, Todo task) =>
+{
+    var todo = todos.FirstOrDefault(t => t.Id == id);
+
+    if (todo is null)
+    {
+        return Results.NotFound($"Todo with Id {id} not found");
+    }
+
+    var newTodo = todo with { Name = task.Name };
+    todos.Remove(todo);
+    todos.Add(newTodo);
+    return Results.Ok($"Todo with Id {id} is updated");
+});
+
+app.MapDelete("/todos/{id}", (int id) =>
+{
+    var todo = todos.FirstOrDefault(t => t.Id == id);
+
+    if (todo is null)
+    {
+        return Results.NotFound($"Todo with Id {id} not found");
+    }
+    todos.Remove(todo);
+    return Results.Ok($"Todo with Id {id} is deleted");
+});
+
+app.Run();
+
+public record Todo(int Id, string Name, DateTime DueDate, bool IsCompleted);
+public record FullName(string fullName);

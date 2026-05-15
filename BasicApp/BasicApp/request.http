@@ -1,0 +1,28 @@
+### Create/Add TODO
+POST http://localhost:5136/api/todos
+Content-Type: application/json
+
+{
+    "Id" : 1,
+    "Title" : "Vaibhav One",
+    "IsCompleted" : false,
+    "CreatedAt" : "2026-05-06T13:14:51Z"
+}
+
+### Get All TODOS
+GET http://localhost:5136/api/todos
+
+### Get TODO by ID
+GET http://localhost:5136/api/todos/1
+
+### Update TODO by ID
+PATCH http://localhost:5136/api/todos/1
+Content-Type: application/json
+
+{
+    "Title" : "Vaibhav One",
+    "IsCompleted" : true
+}
+
+### Delete TODO by ID
+DELETE http://localhost:5136/api/todos/1
