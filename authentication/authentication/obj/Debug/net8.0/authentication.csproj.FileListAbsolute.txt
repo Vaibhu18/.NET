@@ -145,3 +145,5 @@ E:\.NET\authentication\authentication\obj\Debug\net8.0\refint\authentication.dll
 E:\.NET\authentication\authentication\obj\Debug\net8.0\authentication.pdb
 E:\.NET\authentication\authentication\obj\Debug\net8.0\authentication.genruntimeconfig.cache
 E:\.NET\authentication\authentication\obj\Debug\net8.0\ref\authentication.dll
+E:\.NET\authentication\authentication\obj\Debug\net8.0\authentication.sourcelink.json
+E:\.NET\authentication\authentication\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

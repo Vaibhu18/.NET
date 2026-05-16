@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
@@ -9,53 +10,47 @@ using Microsoft.IdentityModel.Tokens;
 [Route("api/[controller]")]
 public class AuthController : ControllerBase
 {
-    public AuthController(IConfiguration configuration)
+    private readonly IAuthService service;
+    public AuthController(IAuthService service)
     {
-        this.configuration = configuration;
+        this.service = service;
     }
-    private static User? user = new();
-    private readonly IConfiguration configuration;
 
     [HttpPost("register")]
-    public ActionResult<User?> Register(UserDto request)
+    public async Task<ActionResult<User?>> Register(UserDto request)
     {
-        user.Username = request.Username;
-        user.PasswordHash = new PasswordHasher<User>().HashPassword(user, request.Password);
+        var user = await service.RegisterAsync(request);
+        if (user is null) return BadRequest("User already exists");
         return Ok(user);
     }
 
     [HttpPost("login")]
-    public ActionResult<string> Login(UserDto request)
+    public async Task<ActionResult<TokenResponseDto>> Login(UserDto request)
     {
-        if (user.Username != request.Username)
-            return BadRequest("User not found");
-
-        if (new PasswordHasher<User>().VerifyHashedPassword(user, user.PasswordHash, request.Password) == PasswordVerificationResult.Failed)
-            return BadRequest("Invalid password");
-
-        string token = CreateToken(user);
-        return token;
+        var token = await service.LoginAsync(request);
+        if (token is null) return BadRequest("Invalid credentials");
+        return Ok(token);
     }
 
-    private string CreateToken(User user)
+    [HttpPost("refresh-token")]
+    public async Task<ActionResult<TokenResponseDto>> RefreshToken(RefreshTokenRequestDto request)
     {
-        var claims = new List<Claim>
-        {
-            new Claim(ClaimTypes.Name, user.Username)
-        };
+        var token = await service.RefreshTokenAsync(request);
+        if (token is null) return BadRequest("invalid/expired refresh token");
+        return Ok(token);
+    }
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetValue<string>("AppSettings:Token")!));
+    [HttpGet("Auth-endpoint")]
+    [Authorize] // which is setuped in program.cs
+    public ActionResult AuthCheck()
+    {
+        return Ok();
+    }
 
-        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
-
-        var token = new JwtSecurityToken(
-            issuer: configuration.GetValue<string>("AppSettings:Issuer"),
-            audience: configuration.GetValue<string>("AppSettings:Audience"),
-            claims: claims,
-            expires: DateTime.UtcNow.AddDays(1),
-            signingCredentials: creds
-        );
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
+    [HttpGet("Admin-endpoint")]
+    [Authorize(Roles = "Admin")] // which is setuped in program.cs
+    public ActionResult AdminCheck()
+    {
+        return Ok();
     }
 }
