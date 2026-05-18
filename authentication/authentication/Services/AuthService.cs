@@ -25,6 +25,7 @@ public class AuthService : IAuthService
         var user = new User();
         user.Username = request.Username;
         user.PasswordHash = new PasswordHasher<User>().HashPassword(user, request.Password);
+        user.Role = request.Role;
 
         await context.Users.AddAsync(user);
         await context.SaveChangesAsync();
